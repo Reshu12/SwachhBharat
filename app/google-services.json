@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "912963788694",
+    "firebase_url": "https://swachhbharat-337de.firebaseio.com",
+    "project_id": "swachhbharat-337de",
+    "storage_bucket": "swachhbharat-337de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912963788694:android:23b0464ca5d5580f",
+        "android_client_info": {
+          "package_name": "com.example.reshugoel.swachhbharat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912963788694-nlggbg9hhv88j6jjnalu0ev7vdivqi70.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.reshugoel.swachhbharat",
+            "certificate_hash": "2c366d1257d9275f7f04707f310c432306bed531"
+          }
+        },
+        {
+          "client_id": "912963788694-7ss7ribaq3reo7b12unff4g6u2puo49v.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "912963788694-7ss7ribaq3reo7b12unff4g6u2puo49v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5dGLi-OcdtE-wulekdV4WOAaEnP543SA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912963788694-7ss7ribaq3reo7b12unff4g6u2puo49v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

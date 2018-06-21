@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SwachhBharat</string>
+    <array name="waste">
+        <item>Vegetable peels</item>
+        <item>Paper</item>
+        <item>Metal cans</item>
+        <item>Leaves</item>
+        <item>Construction waste</item>
+        <item>Electronic waste</item>
+        <item>Plastic</item>
+    </array>
+
+</resources>
