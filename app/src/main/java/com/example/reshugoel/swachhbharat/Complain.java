@@ -109,16 +109,14 @@ public class Complain extends AppCompatActivity {
         }
         else if(requestCode==PICK_IMAGE_REQUEST_CAMERA && resultCode==RESULT_OK && data!=null && data.getData()!=null){
 
+          Bundle bundle=data.getExtras();
+          final Bitmap bitmap=(Bitmap) bundle.get("data");
+          preview.setImageBitmap(bitmap);
 
-          /* Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            Drawable drawable=new BitmapDrawable(bitmap);
-            preview.setImageBitmap(bitmap);
-            preview.setVisibility(View.VISIBLE);
+           //mimage=data.getData();
+          // Picasso.get().load(mimage).into(preview);
 
-           mimage=data.getData();
-           Picasso.get().load(mimage).into(preview);*/
-
-          Bitmap bitmap=(Bitmap) data.getExtras().get("data");
+          /*Bitmap bitmap=(Bitmap) data.getExtras().get("data");
             int currentBitmapWidth = bitmap.getWidth();
             int currentBitmapHeight = bitmap.getHeight();
             int ivWidth = preview.getWidth();
@@ -126,7 +124,7 @@ public class Complain extends AppCompatActivity {
             int newWidth = ivWidth;
             int  newHeight = (int) Math.floor((double) currentBitmapHeight *( (double) newWidth / (double) currentBitmapWidth));
             Bitmap newbitMap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
-            preview.setImageBitmap(newbitMap);
+            preview.setImageBitmap(newbitMap);*/
 
 
         }
@@ -167,8 +165,8 @@ public class Complain extends AppCompatActivity {
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                    double progressmade= (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getBytesTransferred());
-                    progressBar.setProgress((int)progressmade);
+                    progressBar.setMax(100);
+                    progressBar.incrementProgressBy(5);
                 }
             });
 

@@ -56,6 +56,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                             mcontext.startActivity(intent); break;
                     case 1: Intent intent1 =new Intent(mcontext,Complain.class);
                         mcontext.startActivity(intent1); break;
+                    case 2: Intent intent2=new Intent(mcontext,Videos.class);
+                            mcontext.startActivity(intent2); break;
                 }
 
                 //passing data to activity
