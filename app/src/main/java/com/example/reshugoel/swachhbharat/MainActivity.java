@@ -7,10 +7,13 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         imageView= (ImageView)findViewById(R.id.imagesplash);
         Animation animation= AnimationUtils.loadAnimation(this,R.anim.mytransition);
         imageView.startAnimation(animation);
-        final Intent intent= new Intent(MainActivity.this,HomePage.class);
+        firebaseAuth=FirebaseAuth.getInstance();
         Thread timer= new Thread(){
             @Override
             public void run() {
@@ -29,11 +32,20 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 finally {
-                    startActivity(intent);
+                    if (firebaseAuth.getCurrentUser()!=null){
+                       final Intent intent= new Intent(MainActivity.this,HomePage.class);
+                        startActivity(intent);
+                    }
+                    else
+                    { final Intent intent= new Intent(MainActivity.this,Login.class);
+                        startActivity(intent);
+                    }
                     finish();
                 }
             }
         };
+
         timer.start();
     }
+
 }

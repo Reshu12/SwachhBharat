@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +15,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 
 public class Login extends AppCompatActivity {
 
@@ -28,16 +31,11 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         button=(Button)findViewById(R.id.log);
         user=(EditText)findViewById(R.id.em);
         pass=(EditText)findViewById(R.id.pa);
         signup=(TextView)findViewById(R.id.signup);
         firebaseAuth= FirebaseAuth.getInstance();
-        if (firebaseAuth.getCurrentUser()!=null){
-            Intent intent8= new Intent(Login.this,HomePage.class);
-            startActivity(intent8);
-        }
         firebaseAuth= FirebaseAuth.getInstance();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,9 +57,13 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()){
                             Intent intent8= new Intent(Login.this,HomePage.class);
                             startActivity(intent8);
+                            finish();
                         }
                         else{
+
+                            FirebaseNetworkException e = (FirebaseNetworkException)task.getException();
                             Toast.makeText(Login.this,"Invalid user",Toast.LENGTH_SHORT).show();
+                            Log.i("TAG",""+e.getMessage());
                         }
                     }
                 });

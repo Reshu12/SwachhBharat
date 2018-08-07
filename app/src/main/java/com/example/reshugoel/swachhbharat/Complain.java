@@ -15,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -39,6 +40,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static android.media.MediaRecorder.VideoSource.CAMERA;
 
@@ -51,6 +54,8 @@ public class Complain extends AppCompatActivity {
     private ImageView preview;
     private Uri mimage;
     private ProgressBar progressBar;
+    private Bitmap mImageBitmap;
+    private String mCurrentPhotoPath;
 
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
@@ -79,14 +84,27 @@ public class Complain extends AppCompatActivity {
                 startActivityForResult(intent,PICK_IMAGE_REQUEST_GALLERY);
             }
         });
-        camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,PICK_IMAGE_REQUEST_CAMERA);
-            }
-        });
+//        camera.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+//                    // Create the File where the photo should go
+//                    File photoFile = null;
+//                    try {
+//                        photoFile = createImageFile();
+//                    } catch (IOException ex) {
+//                        // Error occurred while creating the File
+//                        Log.i("TAG", "IOException");
+//                    }
+//                    // Continue only if the File was successfully created
+//                    if (photoFile != null) {
+//                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+//                        startActivityForResult(cameraIntent, PICK_IMAGE_REQUEST_CAMERA);
+//                    }
+//                }
+//            }
+//        });
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +117,22 @@ public class Complain extends AppCompatActivity {
             }
         });
     }
+//    private File createImageFile() throws IOException {
+//        // Create an image file name
+//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+//        String imageFileName = "JPEG_" + timeStamp + "_";
+//        File storageDir = Environment.getExternalStoragePublicDirectory(
+//                Environment.DIRECTORY_PICTURES);
+//        File image = File.createTempFile(
+//                imageFileName,  // prefix
+//                ".jpg",         // suffix
+//                storageDir      // directory
+//        );
+//
+//        // Save a file: path for use with ACTION_VIEW intents
+//        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+//        return image;
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -107,27 +141,17 @@ public class Complain extends AppCompatActivity {
             mimage=data.getData();
             Picasso.get().load(mimage).into(preview);
         }
-        else if(requestCode==PICK_IMAGE_REQUEST_CAMERA && resultCode==RESULT_OK && data!=null && data.getData()!=null){
-
-          Bundle bundle=data.getExtras();
-          final Bitmap bitmap=(Bitmap) bundle.get("data");
-          preview.setImageBitmap(bitmap);
-
+//        else if(requestCode==PICK_IMAGE_REQUEST_CAMERA && resultCode==RESULT_OK ){
+//                try {
+//                    mImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(mCurrentPhotoPath));
+//                    preview.setImageBitmap(mImageBitmap);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
            //mimage=data.getData();
           // Picasso.get().load(mimage).into(preview);
 
-          /*Bitmap bitmap=(Bitmap) data.getExtras().get("data");
-            int currentBitmapWidth = bitmap.getWidth();
-            int currentBitmapHeight = bitmap.getHeight();
-            int ivWidth = preview.getWidth();
-            int ivHeight = preview.getHeight();
-            int newWidth = ivWidth;
-            int  newHeight = (int) Math.floor((double) currentBitmapHeight *( (double) newWidth / (double) currentBitmapWidth));
-            Bitmap newbitMap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
-            preview.setImageBitmap(newbitMap);*/
-
-
-        }
     }
 //Just gets extension of the file
     private String getFileExtension(Uri uri){
@@ -153,8 +177,9 @@ public class Complain extends AppCompatActivity {
                     ComplaintSubmit complaintSubmit=new ComplaintSubmit(location.getText().toString().trim(),taskSnapshot.getDownloadUrl().toString());
                     String uploadId=databaseReference.push().getKey();
                     databaseReference.child(uploadId).setValue(complaintSubmit);
-                    Intent intent1= new Intent(Complain.this,HomePage.class);
-                    startActivity(intent1);
+//                    Intent intent1= new Intent(Complain.this,HomePage.class);
+//                    startActivity(intent1);
+                    finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override

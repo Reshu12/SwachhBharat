@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "912963788694-qv9ns143gr9trap4tpqko1s0hl06dbe3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.reshugoel.swachhbharat",
+            "certificate_hash": "761c07b98cb111fe0a51a809b995ede67bcf22bc"
+          }
+        },
+        {
           "client_id": "912963788694-7ss7ribaq3reo7b12unff4g6u2puo49v.apps.googleusercontent.com",
           "client_type": 3
         }

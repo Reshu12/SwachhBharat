@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -130,7 +131,14 @@ public class Segregation extends AppCompatActivity {
         public void setDetails(String category, String image){
            TextView textView=(TextView)mView.findViewById(R.id.te);
             ImageView imageView=(ImageView)mView.findViewById(R.id.re);
+            ImageView dust=(ImageView)mView.findViewById(R.id.dustbin);
+
             textView.setText(category);
+            Log.i("TAG",""+category);
+            if(category.equals("Non Biodegradable"))
+                dust.setImageResource(R.drawable.blue_dustbin);
+            else
+                dust.setImageResource(R.drawable.green_dustbin);
             Picasso.get().load(image).into(imageView);
         }
    }
