@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import java.util.Vector;
 
@@ -28,5 +29,11 @@ public class Videos extends AppCompatActivity {
 
         VideoAdapter videoAdapter=new VideoAdapter(youtubevideos);
         recyclerView.setAdapter(videoAdapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
